@@ -16,7 +16,7 @@ const getInfo = async () => {
 };
 
 const getState = async () => {
-  return get<{ state: number }>();
+  return get<{ state: {state: number} }>();
 };
 
 /* SUBMIT ACTION */

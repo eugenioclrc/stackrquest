@@ -8,8 +8,11 @@ const mru = await MicroRollup({
   actionSchemas: [UpdateCounterSchema],
   stateMachines: [counterMachine],
   stfSchemaMap: {
-    increment: UpdateCounterSchema,
-    decrement: UpdateCounterSchema,
+    join: UpdateCounterSchema,
+    up: UpdateCounterSchema,
+    down: UpdateCounterSchema,
+    left: UpdateCounterSchema,
+    right: UpdateCounterSchema,
   },
 });
 

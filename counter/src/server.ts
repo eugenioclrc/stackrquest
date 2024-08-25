@@ -5,9 +5,13 @@ import { mru } from "./stackr/mru";
 import { schemas } from "./stackr/schemas";
 import { transitions } from "./stackr/transitions";
 
+  import { Playground } from "@stackr/sdk/plugins";
+
 const PORT = 3210;
 
 export async function setupServer() {
+  Playground.init(mru);
+  
   const app = express();
   app.use(express.json());
   // allow CORS

@@ -20,7 +20,6 @@ export const useAction = () => {
 
     const schemaName = transitionToSchema[name];
     const schema = schemas[schemaName];
-
     const signature = await signTypedData({
       domain,
       types: schema.types,
