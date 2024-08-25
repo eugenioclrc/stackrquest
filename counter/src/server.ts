@@ -9,8 +9,8 @@ import { transitions } from "./stackr/transitions";
 
 const PORT = 3210;
 
+
 export async function setupServer() {
-  Playground.init(mru);
   
   const app = express();
   app.use(express.json());
@@ -94,4 +94,7 @@ export async function setupServer() {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
+
+Playground.init(await mru);
+
 }

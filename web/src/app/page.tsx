@@ -23,8 +23,8 @@ export default function Home() {
       try {
         setFetching(true);
         const res = await getState();
-        //console.log("Initial state", res.state);
-        // EventBus.emit('updateState', res.state);
+        console.log("Initial state", res.state);
+         EventBus.emit('updateState', res.state);
         
         setValue(res.state.state);
       } catch (e) {
@@ -68,6 +68,8 @@ export default function Home() {
         throw new Error("Failed to submit action");
       }
       setValue(res.logs[0].value.state);
+      console.log("Initial state", res.logs[0].value);
+         EventBus.emit('updateState', res.logs[0].value);
     } catch (e) {
       alert((e as Error).message);
       console.error(e);

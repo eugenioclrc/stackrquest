@@ -59,7 +59,7 @@ export class Game extends Scene
           }
       }
 
-      this.cameras.main.setZoom(4);
+      //s.main.setZoom(4);
       let [playerX, playerY] = m.rooms[0].getCenter();
       this.cameras.main.centerOn(playerX * 16, playerY * 16);
       
@@ -69,7 +69,7 @@ export class Game extends Scene
         // Asegurarse de que el juego se renderice sin suavizado de imágenes
         this.game.config.antialias = false;
 
-	
+	this.players = [];
 
       this.cameras.main.setBounds(0, 0, this.layer.width * this.layer.scaleX, this.layer.height * this.layer.scaleY);
 
@@ -78,8 +78,28 @@ export class Game extends Scene
       })
 
       EventBus.addListener('updateState', (state) => {
-        console.log("rerer")
-        state.entities.forEach(element => {
+        const boolMap = {};
+        state.players.forEach(element => {
+            if(!this.players[element.wallet]){
+                const player = this.add.sprite(element.location.x * 16, element.location.y * 16, 'hero', 0);
+                this.players[element.wallet] = player;
+                player.setScale(0.5);
+                player.setOrigin(0.5, 0.5);
+            } else {
+                this.players[element.wallet].x = element.location.x * 16;
+                this.players[element.wallet].y = element.location.y * 16;
+            }
+            boolMap[element.wallet] = true;
+        });
+
+        this.players.forEach(element => {
+            if(!boolMap[element.wallet]){
+                element.destroy();
+            }
+        });
+
+
+
             /*
                   const player = this.add.sprite(playerX * 16, playerY * 16, 'hero', 0);
       // Configurar la escala si es necesario (aquí asumo que el sprite original es de 32x32 y necesitas reducirlo a 16x16)
@@ -87,7 +107,6 @@ export class Game extends Scene
         player.setOrigin(0.5, 0.5); // Asegúrate de que el sprite se centre correctamente
             */
             
-        });
       });
 
 
